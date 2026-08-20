@@ -1006,3 +1006,225 @@
 .config-card .picker-note {
   text-align: center;
 }
+
+/* ============================================================ combos 2A×#2 ===
+ * Five blends of the left-aligned 2A and the centered original #2. Shared:
+ * the sky band + the standard card grid; only the hero composition changes.
+ * ========================================================================== */
+
+/* switcher: push the two "parent" links to the far right */
+.switcher-parent {
+  color: var(--ink-soft);
+}
+
+.switcher-parent-first {
+  margin-left: auto;
+}
+
+.switcher-parent.is-active {
+  color: var(--blue-200);
+  border-bottom-color: var(--blue-200);
+}
+
+/* C1 + C5 — compact centered: shrink the headline and tighten spacing so the
+   cards and their buttons clear the fold */
+.hero-inner-compact {
+  padding-top: 48px;
+  padding-bottom: 88px;
+}
+
+.h1-compact {
+  font-size: clamp(2rem, 4.4vw, 3rem);
+  margin-bottom: 16px;
+}
+
+.hero-inner-compact .lede {
+  margin-bottom: 0;
+}
+
+.hero-inner-compact .plan-grid-sky {
+  margin-top: 30px;
+}
+
+.hero-inner-compact .hero-note {
+  margin-top: 20px;
+}
+
+/* C5 — a decorative bottle tucked into the hero's top-right corner */
+.bottle-accent {
+  position: absolute;
+  top: 30px;
+  right: 3.5%;
+  width: 120px;
+  opacity: 0.95;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* keep a centered compact headline clear of the corner bottle */
+.hero-inner-accent .h1-compact {
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-pick .hero-inner {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 760px) {
+  .bottle-accent {
+    display: none;
+  }
+}
+
+/* C2 + C4 — left-aligned header that fills the width, cards below */
+.hero-inner-combo {
+  grid-template-columns: minmax(0, 1fr);
+  text-align: left;
+  padding-bottom: 112px;
+}
+
+/* C2 — left text, bobbing bottle on the right */
+@media (min-width: 901px) {
+  .combo-head-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 40px;
+    align-items: center;
+  }
+}
+
+.combo-head-split .hero-art {
+  justify-content: flex-end;
+}
+
+.combo-head-split .bottle {
+  width: min(100%, 260px);
+}
+
+/* C3 — centered title, left-aligned body */
+.combo-c3 .lede.lede-left {
+  text-align: left;
+  margin-left: 0;
+  margin-right: auto;
+  max-width: 44em;
+}
+
+.combo-c3 .hero-note-left {
+  text-align: left;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* C4 — headline column + body column */
+@media (min-width: 901px) {
+  .combo-head-2col {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+    gap: 44px;
+    align-items: end;
+  }
+}
+
+.combo-head-body .hero-trust {
+  margin-top: 16px;
+}
+
+/* ====================================================== gen 2 (D1–D5) ======
+ * Blends of the C1–C5 combos. Reuse combo-head-split / -title / -body,
+ * hero-compact, bottle-accent, h1-compact; add a few new arrangements.
+ * ========================================================================== */
+
+/* D1 — three-part header: title | lede+trust | bottle */
+@media (min-width: 1000px) {
+  .gen-tricol {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 0.8fr);
+    gap: 40px;
+    align-items: center;
+  }
+}
+
+@media (min-width: 620px) and (max-width: 999px) {
+  .gen-tricol {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+    gap: 32px;
+    align-items: center;
+  }
+  .gen-tricol .combo-head-title {
+    grid-column: 1 / -1;
+  }
+}
+
+.gen-tricol .hero-art {
+  justify-content: flex-end;
+}
+
+.gen-tricol .combo-head-title h1 {
+  font-size: clamp(1.9rem, 2.7vw, 2.7rem);
+}
+
+.gen-tricol .bottle {
+  width: min(100%, 220px);
+}
+
+/* D2 — centered title, then left body beside the bottle */
+.gen-title-bottle {
+  margin-top: 28px;
+}
+
+@media (min-width: 901px) {
+  .gen-title-bottle {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 40px;
+    align-items: center;
+    text-align: left;
+  }
+}
+
+.gen-title-bottle .hero-art {
+  justify-content: flex-end;
+}
+
+.gen-title-bottle .bottle {
+  width: min(100%, 240px);
+}
+
+.gen-title-bottle .hero-trust {
+  margin-top: 18px;
+}
+
+/* D3 + D5 — one centered row of trust points under the lede */
+.hero-trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 26px;
+  margin: 18px 0 0;
+}
+
+.hero-trust-row li {
+  padding-left: 18px;
+}
+
+.hero-trust-row li::before {
+  top: 7px;
+}
+
+/* D4 — the left+bottle hero, compacted so the cards clear the fold */
+.hero-inner-combo-compact {
+  padding-top: 48px;
+  padding-bottom: 88px;
+}
+
+.hero-inner-combo-compact .plan-grid-sky {
+  margin-top: 30px;
+}
+
+.hero-inner-combo-compact .combo-head-split .bottle {
+  width: min(100%, 210px);
+}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block main %}
+<section class="hero hero-pick hero-compact" id="plans">
+  {% include "_clouds.html" %}
+  <img src="/static/img/logo-icon.svg" alt="" class="bottle bottle-accent" aria-hidden="true">
+  <div class="hero-inner hero-inner-pick hero-inner-compact hero-inner-accent">
+    <p class="eyebrow">Cloud in a Bottle · managed by Imbue</p>
+    <h1 class="h1-compact">Pick a size. We'll run it for you.</h1>
+    <p class="lede">
+      A dedicated Cloud in a Bottle space, set up and kept running by Imbue —
+      pick one and it boots in a few minutes.
+    </p>
+    {% include "_sky_cards.html" %}
+    <p class="hero-note">$10 free credit · usage-based, only billed while running · cancel anytime.</p>
+  </div>
+  <div class="horizon"></div>
+</section>
+
+{% include "_assure.html" %}
+{% endblock %}

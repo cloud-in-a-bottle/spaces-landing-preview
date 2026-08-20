@@ -1,0 +1,14 @@
+<div class="plan-grid plan-grid-sky">
+  {% for plan in plans %}
+  <article class="plan {% if plan.featured %}plan-featured{% endif %}">
+    {% if plan.featured %}<span class="plan-flag">Most picked</span>{% endif %}
+    <h3 class="plan-name">{{ plan.name }}</h3>
+    <p class="plan-specs">{{ plan.specs }}</p>
+    <p class="plan-price"><span class="amount">${{ plan.dollars }}</span><span class="per">/mo while running</span></p>
+    <ul class="plan-points">
+      {% for point in plan.points %}<li>{{ point }}</li>{% endfor %}
+    </ul>
+    <a class="button {% if plan.featured %}button-primary{% endif %} button-lg" href="#">Start with {{ plan.name }}</a>
+  </article>
+  {% endfor %}
+</div>

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block main %}
+<section class="hero" id="plans">
+  {% include "_clouds.html" %}
+  <div class="hero-inner hero-inner-combo">
+    <div class="combo-head-split">
+      <div class="hero-text">
+        <p class="eyebrow">Cloud in a Bottle · managed by Imbue</p>
+        <h1>Pick a size.<br>We'll run it for you.</h1>
+        <p class="lede">
+          A dedicated Cloud in a Bottle space, set up and kept running by Imbue.
+          Choose a size and it boots in a few minutes — your key, your data.
+        </p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <img src="/static/img/logo-icon.svg" alt="" class="bottle">
+      </div>
+    </div>
+    {% include "_sky_cards.html" %}
+    <p class="hero-note hero-note-left">
+      $10 free credit to start · usage-based, only billed while running · a card just keeps out the spam.
+    </p>
+  </div>
+  <div class="horizon"></div>
+</section>
+
+{% include "_assure.html" %}
+{% endblock %}
