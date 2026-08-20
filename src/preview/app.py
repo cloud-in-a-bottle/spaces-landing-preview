@@ -68,42 +68,66 @@ PLANS: tuple[PlanView, ...] = (
 @attr.s(auto_attribs=True, frozen=True)
 class Approach:
     slug: str
+    code: str
     label: str
     tagline: str
     template: str
 
 
-APPROACHES: tuple[Approach, ...] = (
+# The chosen direction (#2, "In the sky") expanded into five variations.
+SKY_APPROACHES: tuple[Approach, ...] = (
     Approach(
-        slug="stacked",
-        label="Stacked",
-        tagline="A short hero, then three equal size cards below it.",
-        template="approach_stacked.html",
+        slug="sky-left",
+        code="2A",
+        label="Left rail",
+        tagline="Same idea, left-aligned: headline and lede up top, the three cards in a row on the sky below.",
+        template="sky_left.html",
     ),
     Approach(
-        slug="sky",
-        label="In the sky",
-        tagline="Pick a size right inside the hero — the cards float on the sky, no scroll.",
-        template="approach_sky.html",
+        slug="sky-side",
+        code="2B",
+        label="Side by side",
+        tagline="Pitch on the left, the three size cards stacked on the right — everything still in the sky.",
+        template="sky_side.html",
     ),
     Approach(
-        slug="split",
-        label="Split picker",
-        tagline="Pitch on the left, a live size picker with one button on the right.",
-        template="approach_split.html",
+        slug="sky-tiered",
+        code="2C",
+        label="Tiered",
+        tagline="Centered, with Medium raised and enlarged the way pricing pages spotlight the middle tier.",
+        template="sky_tiered.html",
     ),
     Approach(
-        slug="default",
-        label="One default",
-        tagline="Lead with the recommended size; the other two tuck in beneath it.",
-        template="approach_default.html",
+        slug="sky-compact",
+        code="2D",
+        label="Compact band",
+        tagline="Centered headline, then one slim row of horizontal cards — the lightest, most above-the-fold.",
+        template="sky_compact.html",
     ),
     Approach(
-        slug="table",
-        label="Spec sheet",
-        tagline="A pixel comparison table laying the three sizes side by side.",
-        template="approach_table.html",
+        slug="sky-config",
+        code="2E",
+        label="Configurator",
+        tagline="A single floating panel: a Small / Medium / Large pixel toggle that swaps the price, specs, and CTA.",
+        template="sky_config.html",
     ),
+)
+
+# The original #2 these five build on, kept reachable for comparison.
+BASELINE = Approach(
+    slug="sky",
+    code="2",
+    label="In the sky (original)",
+    tagline="The approach these five are variations of.",
+    template="approach_sky.html",
+)
+
+# The earlier approaches, still reachable from the overview.
+ARCHIVE: tuple[Approach, ...] = (
+    Approach("stacked", "1", "Stacked", "Hero, then three equal cards below.", "approach_stacked.html"),
+    Approach("split", "3", "Split picker", "Pitch left, live picker right.", "approach_split.html"),
+    Approach("default", "4", "One default", "Lead with the recommended size.", "approach_default.html"),
+    Approach("table", "5", "Spec sheet", "A comparison table across sizes.", "approach_table.html"),
 )
 
 BUILD_TAG = os.environ.get("PREVIEW_BUILD", "dev")
@@ -112,7 +136,9 @@ BUILD_TAG = os.environ.get("PREVIEW_BUILD", "dev")
 def _context(current_slug: str | None) -> dict[str, object]:
     return {
         "plans": PLANS,
-        "approaches": APPROACHES,
+        "sky_approaches": SKY_APPROACHES,
+        "baseline": BASELINE,
+        "archive": ARCHIVE,
         "build": BUILD_TAG,
         "current_slug": current_slug,
     }
@@ -137,11 +163,12 @@ def _make_approach_handler(approach: Approach):
 
 
 def build_app() -> Litestar:
+    approach_handlers = [_make_approach_handler(a) for a in (*SKY_APPROACHES, BASELINE, *ARCHIVE)]
     return Litestar(
         route_handlers=[
             overview,
             health,
-            *[_make_approach_handler(a) for a in APPROACHES],
+            *approach_handlers,
             create_static_files_router(path="/static", directories=[STATIC_DIR]),
         ],
         template_config=TemplateConfig(directory=TEMPLATES_DIR, engine=JinjaTemplateEngine),

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block main %}
+<section class="hero" id="plans">
+  <div class="sky-clouds" aria-hidden="true">
+    <div class="cloud cloud-1">{% include "_cloud.svg" %}</div>
+    <div class="cloud cloud-2" style="opacity:.75">{% include "_cloud.svg" %}</div>
+    <div class="cloud cloud-3" style="opacity:.55">{% include "_cloud.svg" %}</div>
+    <div class="cloud cloud-4" style="opacity:.85">{% include "_cloud.svg" %}</div>
+  </div>
+  <div class="hero-inner hero-inner-sky-side">
+    <div class="hero-text">
+      <p class="eyebrow">Cloud in a Bottle · managed by Imbue</p>
+      <h1>Pick a size.<br>We'll run it.</h1>
+      <p class="lede">
+        A dedicated Cloud in a Bottle space, set up and kept running by Imbue.
+        Choose a size and it boots in a few minutes.
+      </p>
+      <ul class="hero-trust">
+        <li>Your SSH key, your data. We keep no copy.</li>
+        <li>HTTPS, DNS, and a subdomain, ready before you log in.</li>
+        <li>$10 free credit · only billed while running.</li>
+      </ul>
+    </div>
+
+    <div class="plan-stack">
+      {% for plan in plans %}
+      <article class="plan plan-compact {% if plan.featured %}plan-featured{% endif %}">
+        <div class="pc-row">
+          <div class="pc-info">
+            <h3 class="plan-name">{{ plan.name }}{% if plan.featured %} <span class="pc-flag">· most picked</span>{% endif %}</h3>
+            <p class="plan-specs">{{ plan.specs }} — {{ plan.good_for }}</p>
+          </div>
+          <p class="plan-price"><span class="amount">${{ plan.dollars }}</span><span class="per">/mo</span></p>
+        </div>
+        <a class="button {% if plan.featured %}button-primary{% endif %}" href="#">Start with {{ plan.name }}</a>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="horizon"></div>
+</section>
+
+{% include "_assure.html" %}
+{% endblock %}

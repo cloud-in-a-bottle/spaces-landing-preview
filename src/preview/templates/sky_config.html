@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block main %}
+<section class="hero hero-pick" id="plans">
+  <div class="sky-clouds" aria-hidden="true">
+    <div class="cloud cloud-1">{% include "_cloud.svg" %}</div>
+    <div class="cloud cloud-2" style="opacity:.75">{% include "_cloud.svg" %}</div>
+    <div class="cloud cloud-3" style="opacity:.55">{% include "_cloud.svg" %}</div>
+    <div class="cloud cloud-4" style="opacity:.85">{% include "_cloud.svg" %}</div>
+  </div>
+  <div class="hero-inner hero-inner-pick">
+    <p class="eyebrow">Cloud in a Bottle · managed by Imbue</p>
+    <h1>Configure your space.</h1>
+    <p class="lede">
+      A dedicated Cloud in a Bottle space, set up and kept running by Imbue.
+      Slide to a size and it boots in a few minutes.
+    </p>
+
+    <div class="config-card">
+      <div class="seg" role="group" aria-label="Choose a size">
+        {% for plan in plans %}
+        <button type="button" class="seg-btn" data-plan="{{ plan.slug }}" aria-pressed="{{ 'true' if plan.featured else 'false' }}">{{ plan.name }}</button>
+        {% endfor %}
+      </div>
+
+      {% for plan in plans %}
+      <div class="config-panel" data-plan="{{ plan.slug }}"{% if not plan.featured %} hidden{% endif %}>
+        <p class="config-price"><span class="amount">${{ plan.dollars }}</span><span class="per">/mo while running</span></p>
+        <p class="config-specs">{{ plan.specs }} — {{ plan.good_for }}</p>
+        <ul class="plan-points">
+          {% for point in plan.points %}<li>{{ point }}</li>{% endfor %}
+        </ul>
+        <a class="button button-primary button-lg config-cta" href="#">Start with {{ plan.name }}</a>
+      </div>
+      {% endfor %}
+
+      <p class="picker-note">Usage-based — only billed while the space is running. $10 free credit to start.</p>
+    </div>
+  </div>
+  <div class="horizon"></div>
+</section>
+
+{% include "_assure.html" %}
+{% endblock %}
+{% block scripts %}
+<script>
+  (function () {
+    var btns = document.querySelectorAll('.seg-btn');
+    var panels = document.querySelectorAll('.config-panel');
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        btns.forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+        b.setAttribute('aria-pressed', 'true');
+        panels.forEach(function (p) { p.hidden = (p.dataset.plan !== b.dataset.plan); });
+      });
+    });
+  })();
+</script>
+{% endblock %}

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Five approaches — managed spaces preview{% endblock %}
+{% block title %}Five variations of “In the sky” — managed spaces preview{% endblock %}
 {% block main %}
 <section class="hero hero-short">
   <div class="sky-clouds" aria-hidden="true">
@@ -11,10 +11,10 @@
   <div class="hero-inner hero-inner-short">
     <div>
       <p class="eyebrow">Managed spaces · styling preview</p>
-      <h1>Five ways to say<br>“pick a size.”</h1>
+      <h1>Five takes on<br>“in the sky.”</h1>
       <p class="lede">
-        Same Cloud in a Bottle look, same merged home + choose-space idea from the note —
-        five layouts of it. Open each, then tell me which to take forward.
+        You picked approach 2 — cards floating in the sky, the pick above the fold.
+        Here are five variations of it. Open each, then tell me which to take forward.
       </p>
     </div>
   </div>
@@ -23,18 +23,25 @@
 
 <section class="chooser">
   <div class="approach-grid">
-    {% for a in approaches %}
+    {% for a in sky_approaches %}
     <a class="approach-card" href="/{{ a.slug }}">
-      <span class="approach-num">Approach {{ loop.index }}</span>
+      <span class="approach-num">Variation {{ a.code }}</span>
       <h3>{{ a.label }}</h3>
       <p>{{ a.tagline }}</p>
-      <span class="button approach-view">Open approach {{ loop.index }} →</span>
+      <span class="button approach-view">Open {{ a.code }} →</span>
     </a>
     {% endfor %}
   </div>
+
   <p class="chooser-note">
-    All five share the exact <code>site.css</code> from the landing-page repo; only the
-    hero + plan-picker arrangement differs. The plan buttons don't provision anything.
+    All five keep the sky band and the same <code>site.css</code> from the landing-page repo —
+    only the arrangement of the size cards changes. The plan buttons don't provision anything.
   </p>
+
+  <div class="compare-with">
+    <span class="compare-with-label">Compare with:</span>
+    <a href="/{{ baseline.slug }}">Original #2 (In the sky)</a>
+    {% for a in archive %}<a href="/{{ a.slug }}">#{{ a.code }} {{ a.label }}</a>{% endfor %}
+  </div>
 </section>
 {% endblock %}

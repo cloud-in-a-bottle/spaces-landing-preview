@@ -29,14 +29,15 @@
     </div>
   </header>
 
-  {% if approaches %}
+  {% if sky_approaches %}
   <div class="switcher">
     <div class="switcher-inner">
-      <span class="switcher-label">Approach:</span>
+      <span class="switcher-label">Variations of #2:</span>
       <a href="/" class="{{ 'is-active' if not current_slug }}">Overview</a>
-      {% for a in approaches %}
-      <a href="/{{ a.slug }}" class="{{ 'is-active' if a.slug == current_slug }}">{{ loop.index }} · {{ a.label }}</a>
+      {% for a in sky_approaches %}
+      <a href="/{{ a.slug }}" class="{{ 'is-active' if a.slug == current_slug }}">{{ a.code }} · {{ a.label }}</a>
       {% endfor %}
+      <a href="/{{ baseline.slug }}" class="switcher-baseline {{ 'is-active' if baseline.slug == current_slug }}">Original #2</a>
     </div>
   </div>
   {% endif %}

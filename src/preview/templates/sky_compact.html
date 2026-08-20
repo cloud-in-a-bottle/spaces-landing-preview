@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block main %}
+<section class="hero hero-pick" id="plans">
+  <div class="sky-clouds" aria-hidden="true">
+    <div class="cloud cloud-1">{% include "_cloud.svg" %}</div>
+    <div class="cloud cloud-2" style="opacity:.75">{% include "_cloud.svg" %}</div>
+    <div class="cloud cloud-3" style="opacity:.55">{% include "_cloud.svg" %}</div>
+    <div class="cloud cloud-4" style="opacity:.85">{% include "_cloud.svg" %}</div>
+  </div>
+  <div class="hero-inner hero-inner-pick">
+    <p class="eyebrow">Cloud in a Bottle · managed by Imbue</p>
+    <h1>Pick a size.<br>We'll run it for you.</h1>
+    <p class="lede">
+      A dedicated Cloud in a Bottle space, set up and kept running by Imbue —
+      pick one and it boots in a few minutes.
+    </p>
+
+    <div class="plan-band">
+      {% for plan in plans %}
+      <article class="plan plan-slim {% if plan.featured %}plan-featured{% endif %}">
+        <div class="slim-info">
+          <span class="slim-name">{{ plan.name }}{% if plan.featured %} <span class="slim-flag">· most picked</span>{% endif %}</span>
+          <span class="slim-specs">{{ plan.specs }}</span>
+        </div>
+        <span class="slim-price">${{ plan.dollars }}<span class="per">/mo</span></span>
+        <a class="button {% if plan.featured %}button-primary{% endif %}" href="#">Start</a>
+      </article>
+      {% endfor %}
+    </div>
+
+    <p class="hero-note">
+      $10 free credit · usage-based, only billed while running · cancel anytime.
+    </p>
+  </div>
+  <div class="horizon"></div>
+</section>
+
+{% include "_assure.html" %}
+{% endblock %}
