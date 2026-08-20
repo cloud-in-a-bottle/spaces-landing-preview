@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Five approaches — managed spaces preview{% endblock %}
+{% block main %}
+<section class="hero hero-short">
+  <div class="sky-clouds" aria-hidden="true">
+    <div class="cloud cloud-1">{% include "_cloud.svg" %}</div>
+    <div class="cloud cloud-2" style="opacity:.75">{% include "_cloud.svg" %}</div>
+    <div class="cloud cloud-3" style="opacity:.55">{% include "_cloud.svg" %}</div>
+    <div class="cloud cloud-4" style="opacity:.85">{% include "_cloud.svg" %}</div>
+  </div>
+  <div class="hero-inner hero-inner-short">
+    <div>
+      <p class="eyebrow">Managed spaces · styling preview</p>
+      <h1>Five ways to say<br>“pick a size.”</h1>
+      <p class="lede">
+        Same Cloud in a Bottle look, same merged home + choose-space idea from the note —
+        five layouts of it. Open each, then tell me which to take forward.
+      </p>
+    </div>
+  </div>
+  <div class="horizon"></div>
+</section>
+
+<section class="chooser">
+  <div class="approach-grid">
+    {% for a in approaches %}
+    <a class="approach-card" href="/{{ a.slug }}">
+      <span class="approach-num">Approach {{ loop.index }}</span>
+      <h3>{{ a.label }}</h3>
+      <p>{{ a.tagline }}</p>
+      <span class="button approach-view">Open approach {{ loop.index }} →</span>
+    </a>
+    {% endfor %}
+  </div>
+  <p class="chooser-note">
+    All five share the exact <code>site.css</code> from the landing-page repo; only the
+    hero + plan-picker arrangement differs. The plan buttons don't provision anything.
+  </p>
+</section>
+{% endblock %}

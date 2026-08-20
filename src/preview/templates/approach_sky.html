@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block main %}
+<section class="hero hero-pick" id="plans">
+  <div class="sky-clouds" aria-hidden="true">
+    <div class="cloud cloud-1">{% include "_cloud.svg" %}</div>
+    <div class="cloud cloud-2" style="opacity:.75">{% include "_cloud.svg" %}</div>
+    <div class="cloud cloud-3" style="opacity:.55">{% include "_cloud.svg" %}</div>
+    <div class="cloud cloud-4" style="opacity:.85">{% include "_cloud.svg" %}</div>
+  </div>
+  <div class="hero-inner hero-inner-pick">
+    <p class="eyebrow">Cloud in a Bottle · managed by Imbue</p>
+    <h1>Pick a size.<br>We'll run it for you.</h1>
+    <p class="lede">
+      A dedicated Cloud in a Bottle space, set up and kept running by Imbue.
+      Choose a size and it boots in a few minutes — your key, your data.
+    </p>
+
+    <div class="plan-grid plan-grid-sky">
+      {% for plan in plans %}
+      <article class="plan {% if plan.featured %}plan-featured{% endif %}">
+        {% if plan.featured %}<span class="plan-flag">Most picked</span>{% endif %}
+        <h3 class="plan-name">{{ plan.name }}</h3>
+        <p class="plan-specs">{{ plan.specs }}</p>
+        <p class="plan-price"><span class="amount">${{ plan.dollars }}</span><span class="per">/mo while running</span></p>
+        <ul class="plan-points">
+          {% for point in plan.points %}<li>{{ point }}</li>{% endfor %}
+        </ul>
+        <a class="button {% if plan.featured %}button-primary{% endif %} button-lg" href="#">Start with {{ plan.name }}</a>
+      </article>
+      {% endfor %}
+    </div>
+
+    <p class="hero-note">
+      $10 free credit to start · usage-based, only billed while running · a card just keeps out the spam.
+    </p>
+  </div>
+  <div class="horizon"></div>
+</section>
+
+<section class="section assure">
+  <div class="assure-grid">
+    <div class="assure-cell"><h2>Set up for you</h2><p>Imbue provisions a dedicated server, points DNS at it, and installs Cloud in a Bottle — you land on a working dashboard.</p></div>
+    <div class="assure-cell"><h2>Yours to keep</h2><p>It's your instance on your key. Walk away with it, move it to your own hardware, or run your own apps.</p></div>
+    <div class="assure-cell"><h2>Kept running</h2><p>Updates and upkeep are handled. Paying Imbue is optional and is what keeps the open source project funded.</p></div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block main %}
+<section class="hero hero-short" id="plans">
+  <div class="sky-clouds" aria-hidden="true">
+    <div class="cloud cloud-1">{% include "_cloud.svg" %}</div>
+    <div class="cloud cloud-2" style="opacity:.75">{% include "_cloud.svg" %}</div>
+    <div class="cloud cloud-3" style="opacity:.55">{% include "_cloud.svg" %}</div>
+    <div class="cloud cloud-4" style="opacity:.85">{% include "_cloud.svg" %}</div>
+  </div>
+  <div class="hero-inner hero-inner-short">
+    <div>
+      <p class="eyebrow">Cloud in a Bottle · managed by Imbue</p>
+      <h1>A space, run for you.</h1>
+      <p class="lede">
+        Set up and kept running by Imbue. Same open source stack at every size —
+        compare and pick the one that fits.
+      </p>
+    </div>
+  </div>
+  <div class="horizon"></div>
+</section>
+
+<section class="compare">
+  <div class="plans-head">
+    <div>
+      <p class="eyebrow">// choose your space</p>
+      <h2 class="section-title">Compare the sizes.</h2>
+    </div>
+    <p class="plans-sub">Usage-based · only billed while running · cancel anytime</p>
+  </div>
+
+  <div class="compare-scroll">
+    <div class="compare-grid">
+      <div class="cell rowlabel corner"></div>
+      {% for plan in plans %}
+      <div class="cell head {% if plan.featured %}col-featured{% endif %}">
+        {% if plan.featured %}<span class="flag-inline">Most picked</span>{% endif %}
+        <span class="ch-name">{{ plan.name }}</span>
+      </div>
+      {% endfor %}
+
+      <div class="cell rowlabel">Price</div>
+      {% for plan in plans %}
+      <div class="cell price {% if plan.featured %}col-featured{% endif %}"><span class="amount">${{ plan.dollars }}</span><span class="per">/mo</span></div>
+      {% endfor %}
+
+      <div class="cell rowlabel">Memory</div>
+      {% for plan in plans %}
+      <div class="cell {% if plan.featured %}col-featured{% endif %}">{{ plan.memory_gb }} GB RAM</div>
+      {% endfor %}
+
+      <div class="cell rowlabel">Processor</div>
+      {% for plan in plans %}
+      <div class="cell {% if plan.featured %}col-featured{% endif %}">{{ plan.vcpus }} vCPU</div>
+      {% endfor %}
+
+      <div class="cell rowlabel">Good for</div>
+      {% for plan in plans %}
+      <div class="cell {% if plan.featured %}col-featured{% endif %}">{{ plan.good_for }}</div>
+      {% endfor %}
+
+      <div class="cell rowlabel"></div>
+      {% for plan in plans %}
+      <div class="cell cta {% if plan.featured %}col-featured{% endif %}">
+        <a class="button {% if plan.featured %}button-primary{% endif %}" href="#">Start with {{ plan.name }}</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <p class="plans-footnote">
+    Every space runs the identical open source stack — the size only changes how much RAM and
+    CPU it gets. Need something bigger, or your own domain? That's a setting you can change later.
+  </p>
+</section>
+
+<section class="section assure">
+  <div class="assure-grid">
+    <div class="assure-cell"><h2>Set up for you</h2><p>Imbue provisions a dedicated server, points DNS at it, and installs Cloud in a Bottle — you land on a working dashboard.</p></div>
+    <div class="assure-cell"><h2>Yours to keep</h2><p>It's your instance on your key. Walk away with it, move it to your own hardware, or run your own apps.</p></div>
+    <div class="assure-cell"><h2>Kept running</h2><p>Updates and upkeep are handled. Paying Imbue is optional and is what keeps the open source project funded.</p></div>
+  </div>
+</section>
+{% endblock %}

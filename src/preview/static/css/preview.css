@@ -269,3 +269,466 @@
     padding: 48px var(--gutter) 56px;
   }
 }
+
+/* =============================================================== preview =====
+ * Everything below is for the multi-approach preview harness (a switcher bar,
+ * an overview page, and the per-approach layouts). None of it is intended for
+ * the eventual real page — only one approach's rules would graduate.
+ * ========================================================================== */
+
+/* switcher bar under the nav: jump between the five approaches */
+.switcher {
+  background: var(--white);
+  border-bottom: var(--border);
+}
+
+.switcher-inner {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 10px var(--gutter);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-stretch: 87.5%;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.switcher-label {
+  color: var(--ink-soft);
+}
+
+.switcher a {
+  color: var(--black);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+}
+
+.switcher a:hover {
+  border-bottom-color: var(--blue-100);
+}
+
+.switcher a.is-active {
+  color: var(--blue-200);
+  border-bottom-color: var(--blue-200);
+}
+
+/* overview / chooser page */
+.chooser {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 56px var(--gutter) 64px;
+}
+
+.approach-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 22px;
+}
+
+.approach-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: var(--border);
+  box-shadow: 6px 6px 0 var(--shadow-blue);
+  padding: 26px 24px 28px;
+  text-decoration: none;
+  color: var(--black);
+  transition: transform 0.08s steps(2), box-shadow 0.08s steps(2);
+}
+
+.approach-card:hover {
+  color: var(--black);
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 var(--shadow-blue);
+}
+
+.approach-num {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue-200);
+  margin-bottom: 12px;
+}
+
+.approach-card h3 {
+  font-size: 1.2rem;
+  font-stretch: 87.5%;
+  margin-bottom: 10px;
+}
+
+.approach-card p {
+  font-size: 0.97rem;
+  color: var(--ink-soft);
+}
+
+.approach-view {
+  margin-top: 20px;
+  align-self: flex-start;
+}
+
+.chooser-note {
+  margin-top: 30px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-stretch: 87.5%;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+/* single-column, centered hero variants (overview, one-default, spec-sheet) */
+.hero-inner-short {
+  grid-template-columns: minmax(0, 1fr);
+  text-align: center;
+  padding-top: 64px;
+  padding-bottom: 92px;
+}
+
+.hero-inner-short .lede {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Approach 2 — plans inside the sky */
+.hero-inner-pick {
+  grid-template-columns: minmax(0, 1fr);
+  text-align: center;
+  padding-bottom: 116px;
+}
+
+.hero-inner-pick .lede {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-inner-pick .hero-note {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.plan-grid-sky {
+  margin-top: 40px;
+  text-align: left;
+}
+
+/* Approach 3 — split: pitch left, picker right */
+@media (min-width: 901px) {
+  .hero-inner-split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+    align-items: start;
+  }
+}
+
+.picker {
+  background: var(--paper);
+  border: var(--border);
+  box-shadow: 6px 6px 0 var(--shadow-blue);
+  padding: 22px 20px 24px;
+}
+
+.picker-title {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-stretch: 87.5%;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  margin-bottom: 14px;
+}
+
+.picker-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  text-align: left;
+  background: var(--white);
+  border: var(--border);
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font: inherit;
+  color: var(--black);
+}
+
+.picker-row:hover {
+  background: var(--sky-pale);
+}
+
+.picker-row .radio {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  border: var(--border);
+  background: var(--paper);
+}
+
+.picker-row[aria-checked="true"] {
+  background: var(--sky-pale);
+  box-shadow: inset 0 0 0 2px var(--blue-200);
+}
+
+.picker-row[aria-checked="true"] .radio {
+  background: var(--blue-200);
+}
+
+.picker-info {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: block;
+}
+
+.picker-name {
+  display: block;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-stretch: 87.5%;
+  font-size: 0.86rem;
+}
+
+.picker-specs {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.picker-price {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-stretch: 87.5%;
+  font-size: 1.05rem;
+  white-space: nowrap;
+}
+
+.picker-per {
+  font-size: 0.66rem;
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+
+.picker-cta {
+  margin-top: 4px;
+}
+
+.picker-cta .button {
+  width: 100%;
+  text-align: center;
+}
+
+.picker-note {
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-stretch: 87.5%;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+/* Approach 4 — one recommended default, alternatives beneath */
+.plan-hero-wrap {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 56px var(--gutter) 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.plan-hero {
+  width: min(100%, 470px);
+  background: var(--sky-pale);
+  box-shadow: 8px 8px 0 var(--shadow-blue);
+  text-align: center;
+}
+
+.plan-hero .plan-flag {
+  align-self: center;
+}
+
+.plan-hero .plan-price {
+  justify-content: center;
+}
+
+.plan-hero .plan-points {
+  text-align: left;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.plan-hero .button {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.plan-hero-note {
+  margin-top: 14px;
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  font-stretch: 87.5%;
+  color: var(--ink-soft);
+}
+
+.plan-alts-wrap {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 8px var(--gutter) 64px;
+  text-align: center;
+}
+
+.plan-alts-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-stretch: 87.5%;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+}
+
+.plan-alts {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.plan-alt {
+  display: inline-flex;
+  gap: 12px;
+  align-items: baseline;
+  background: var(--paper);
+  border: var(--border);
+  box-shadow: 4px 4px 0 var(--black);
+  padding: 14px 18px;
+  text-decoration: none;
+  color: var(--black);
+  font-family: var(--mono);
+  font-stretch: 87.5%;
+  transition: transform 0.08s steps(2), box-shadow 0.08s steps(2);
+}
+
+.plan-alt:hover {
+  color: var(--black);
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--black);
+}
+
+.plan-alt .a-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.plan-alt .a-specs {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+.plan-alt .a-price {
+  font-size: 0.82rem;
+}
+
+/* Approach 5 — spec-sheet comparison table */
+.compare {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 56px var(--gutter) 72px;
+}
+
+.compare .plans-head {
+  margin-bottom: 32px;
+}
+
+.compare-scroll {
+  overflow-x: auto;
+}
+
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1fr 1fr;
+  gap: 2px;
+  background: var(--black);
+  border: var(--border);
+  min-width: 640px;
+}
+
+.compare-grid .cell {
+  background: var(--paper);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.compare-grid .rowlabel {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  font-stretch: 87.5%;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+}
+
+.compare-grid .corner {
+  background: var(--white);
+}
+
+.compare-grid .head {
+  gap: 8px;
+}
+
+.compare-grid .flag-inline {
+  align-self: flex-start;
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  font-stretch: 87.5%;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--white);
+  background: var(--blue-200);
+  border: var(--border);
+  padding: 2px 6px;
+}
+
+.compare-grid .ch-name {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-stretch: 87.5%;
+  font-size: 1.1rem;
+}
+
+.compare-grid .price {
+  flex-direction: row;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.compare-grid .price .amount {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-stretch: 87.5%;
+  font-size: 1.7rem;
+  letter-spacing: -0.02em;
+}
+
+.compare-grid .price .per {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  color: var(--ink-soft);
+}
+
+.compare-grid .col-featured {
+  background: var(--sky-pale);
+}
+
+.compare-grid .cta .button {
+  width: 100%;
+  text-align: center;
+}

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Managed spaces — Cloud in a Bottle × Imbue{% endblock %}</title>
+  <meta name="description" content="A Cloud in a Bottle space, set up and kept running for you by Imbue. Pick a size and it boots in minutes.">
+  <link rel="icon" href="/static/img/logo-icon.svg">
+  <!-- site.css is a verbatim mirror of the open-source-project-landing-page repo;
+       preview.css layers the plan-picker + co-brand additions on top. -->
+  <link rel="stylesheet" href="/static/css/site.css">
+  <link rel="stylesheet" href="/static/css/preview.css">
+</head>
+<body>
+  <div class="preview-ribbon">Styling preview · not the live site · {{ build }}</div>
+
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="/">
+        <img src="/static/img/logo-inline.svg" alt="Cloud in a Bottle" height="30">
+        <span class="nav-cobrand">× Imbue</span>
+      </a>
+      <nav class="nav-links" aria-label="Main">
+        <a href="https://cloudinabottle.org/apps" target="_blank" rel="noopener noreferrer">Apps</a>
+        <a href="https://cloudinabottle.org/docs/" target="_blank" rel="noopener noreferrer">Docs</a>
+        <a href="#plans">Log in</a>
+        <a class="nav-cta" href="#plans">Get a space</a>
+      </nav>
+    </div>
+  </header>
+
+  {% if approaches %}
+  <div class="switcher">
+    <div class="switcher-inner">
+      <span class="switcher-label">Approach:</span>
+      <a href="/" class="{{ 'is-active' if not current_slug }}">Overview</a>
+      {% for a in approaches %}
+      <a href="/{{ a.slug }}" class="{{ 'is-active' if a.slug == current_slug }}">{{ loop.index }} · {{ a.label }}</a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <main>
+    {% block main %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="/static/img/logo-inline.svg" alt="" height="34" aria-hidden="true">
+        <p class="footer-license">
+          Managed spaces are run by <a href="https://imbue.com/">Imbue</a>, the team behind
+          Cloud in a Bottle. The software is open source under
+          <a href="https://github.com/imbue-openhost/openhost/blob/main/LICENSE">AGPL-3.0</a> —
+          free to run yourself, on any of three paths.
+        </p>
+      </div>
+      <div class="footer-column">
+        <h2>Other ways to get one</h2>
+        <ul>
+          <li><a href="https://cloudinabottle.org/#get-one">On your own hardware</a></li>
+          <li><a href="https://cloudinabottle.org/#get-one">On a rented server</a></li>
+          <li><a href="#plans">Managed by Imbue</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h2>Project</h2>
+        <ul>
+          <li><a href="https://cloudinabottle.org/">cloudinabottle.org</a></li>
+          <li><a href="https://cloudinabottle.org/apps">Browse apps</a></li>
+          <li><a href="https://cloudinabottle.org/docs/">Docs</a></li>
+          <li><a href="https://github.com/imbue-openhost/openhost">Source on GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <div class="footer-base-inner">
+        <span>cloudinabottle.org × imbue.com</span>
+        <span>Your corner of the cloud</span>
+      </div>
+    </div>
+  </footer>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

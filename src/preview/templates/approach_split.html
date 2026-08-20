@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block main %}
+<section class="hero" id="plans">
+  <div class="sky-clouds" aria-hidden="true">
+    <div class="cloud cloud-1">{% include "_cloud.svg" %}</div>
+    <div class="cloud cloud-2" style="opacity:.75">{% include "_cloud.svg" %}</div>
+    <div class="cloud cloud-3" style="opacity:.55">{% include "_cloud.svg" %}</div>
+    <div class="cloud cloud-4" style="opacity:.85">{% include "_cloud.svg" %}</div>
+  </div>
+  <div class="hero-inner hero-inner-split">
+    <div class="hero-text">
+      <p class="eyebrow">Cloud in a Bottle · managed by Imbue</p>
+      <h1>A space,<br>run for you.</h1>
+      <p class="lede">
+        The same open source Cloud in a Bottle, set up and kept running by Imbue.
+        Choose a size and it boots in a few minutes.
+      </p>
+      <ul class="hero-trust">
+        <li>Your SSH key, your data. We keep no copy.</li>
+        <li>HTTPS, DNS, and a subdomain, ready before you log in.</li>
+        <li>$10 free credit · only billed while running.</li>
+      </ul>
+    </div>
+
+    <div class="picker">
+      <p class="picker-title">// choose your space</p>
+      {% for plan in plans %}
+      <button type="button" class="picker-row" data-name="{{ plan.name }}"
+              aria-checked="{{ 'true' if plan.featured else 'false' }}">
+        <span class="radio" aria-hidden="true"></span>
+        <span class="picker-info">
+          <span class="picker-name">{{ plan.name }}{% if plan.featured %} · most picked{% endif %}</span>
+          <span class="picker-specs">{{ plan.specs }} — {{ plan.good_for }}</span>
+        </span>
+        <span class="picker-price">${{ plan.dollars }}<span class="picker-per">/mo</span></span>
+      </button>
+      {% endfor %}
+      <div class="picker-cta">
+        <a class="button button-primary button-lg" id="picker-cta-btn" href="#">Start with Medium</a>
+      </div>
+      <p class="picker-note">Usage-based — you're only billed while the space is running. Cancel anytime.</p>
+    </div>
+  </div>
+  <div class="horizon"></div>
+</section>
+
+<section class="section assure">
+  <div class="assure-grid">
+    <div class="assure-cell"><h2>Set up for you</h2><p>Imbue provisions a dedicated server, points DNS at it, and installs Cloud in a Bottle — you land on a working dashboard.</p></div>
+    <div class="assure-cell"><h2>Yours to keep</h2><p>It's your instance on your key. Walk away with it, move it to your own hardware, or run your own apps.</p></div>
+    <div class="assure-cell"><h2>Kept running</h2><p>Updates and upkeep are handled. Paying Imbue is optional and is what keeps the open source project funded.</p></div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+  (function () {
+    var rows = document.querySelectorAll('.picker-row');
+    var cta = document.getElementById('picker-cta-btn');
+    rows.forEach(function (r) {
+      r.addEventListener('click', function () {
+        rows.forEach(function (x) { x.setAttribute('aria-checked', 'false'); });
+        r.setAttribute('aria-checked', 'true');
+        cta.textContent = 'Start with ' + r.dataset.name;
+      });
+    });
+  })();
+</script>
+{% endblock %}

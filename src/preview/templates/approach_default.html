@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block main %}
+{% set featured = plans | selectattr('featured') | first %}
+{% set alts = plans | rejectattr('featured') | list %}
+<section class="hero hero-short" id="plans">
+  <div class="sky-clouds" aria-hidden="true">
+    <div class="cloud cloud-1">{% include "_cloud.svg" %}</div>
+    <div class="cloud cloud-2" style="opacity:.75">{% include "_cloud.svg" %}</div>
+    <div class="cloud cloud-3" style="opacity:.55">{% include "_cloud.svg" %}</div>
+    <div class="cloud cloud-4" style="opacity:.85">{% include "_cloud.svg" %}</div>
+  </div>
+  <div class="hero-inner hero-inner-short">
+    <div>
+      <p class="eyebrow">Cloud in a Bottle · managed by Imbue</p>
+      <h1>A space, run for you.</h1>
+      <p class="lede">
+        Most people start here. A dedicated Cloud in a Bottle space, set up and kept
+        running by Imbue — your key, your data, booting in a few minutes.
+      </p>
+    </div>
+  </div>
+  <div class="horizon"></div>
+</section>
+
+<section class="plans-default">
+  <div class="plan-hero-wrap">
+    <article class="plan plan-hero">
+      <span class="plan-flag">Most people start here</span>
+      <h2 class="plan-name">{{ featured.name }}</h2>
+      <p class="plan-specs">{{ featured.specs }} — {{ featured.good_for }}</p>
+      <p class="plan-price"><span class="amount">${{ featured.dollars }}</span><span class="per">/mo while running</span></p>
+      <ul class="plan-points">
+        {% for point in featured.points %}<li>{{ point }}</li>{% endfor %}
+      </ul>
+      <a class="button button-primary button-lg" href="#">Start with {{ featured.name }}</a>
+      <p class="plan-hero-note">$10 free credit · usage-based · cancel anytime</p>
+    </article>
+  </div>
+
+  <div class="plan-alts-wrap">
+    <p class="plan-alts-label">Need less, or more?</p>
+    <div class="plan-alts">
+      {% for plan in alts %}
+      <a class="plan-alt" href="#">
+        <span class="a-name">{{ plan.name }}</span>
+        <span class="a-specs">{{ plan.specs }}</span>
+        <span class="a-price">${{ plan.dollars }}/mo</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section assure">
+  <div class="assure-grid">
+    <div class="assure-cell"><h2>Set up for you</h2><p>Imbue provisions a dedicated server, points DNS at it, and installs Cloud in a Bottle — you land on a working dashboard.</p></div>
+    <div class="assure-cell"><h2>Yours to keep</h2><p>It's your instance on your key. Walk away with it, move it to your own hardware, or run your own apps.</p></div>
+    <div class="assure-cell"><h2>Kept running</h2><p>Updates and upkeep are handled. Paying Imbue is optional and is what keeps the open source project funded.</p></div>
+  </div>
+</section>
+{% endblock %}
