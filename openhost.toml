@@ -1,0 +1,18 @@
+[app]
+name = "spaces-landing-preview"
+version = "0.1.0"
+description = "Styling preview: merged managed-spaces landing + plan picker in the Cloud in a Bottle look. Not the live site."
+
+[runtime.container]
+image = "Dockerfile"
+port = 8080
+
+[routing]
+health_check = "/health"
+# Static styling preview with no auth and no user data — the whole thing is
+# meant to be looked at, so serve it publicly.
+public_paths = ["/"]
+
+[resources]
+memory_mb = 256
+cpu_millicores = 250
